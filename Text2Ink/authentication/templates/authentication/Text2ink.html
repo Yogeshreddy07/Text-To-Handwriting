@@ -1,0 +1,293 @@
+<!-- filepath: c:\Users\S Yogesh Reddy\Documents\code IT\Text2Ink\Text2Ink\authentication\templates\authentication\Text2ink.html -->
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text to Handwriting Generator</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Define custom fonts using @font-face */
+        @font-face {
+            font-family: 'Handwriting1';
+            src: url("{% static 'fonts/handwriting1.ttf' %}") format('truetype');
+        }
+
+        @font-face {
+            font-family: 'Handwriting2';
+            src: url("{% static 'fonts/handwriting2.ttf' %}") format('truetype');
+        }
+
+        @font-face {
+            font-family: 'Handwriting3';
+            src: url("{% static 'fonts/handwriting3.ttf' %}") format('truetype');
+        }
+
+        @font-face {
+            font-family: 'Handwriting4';
+            src: url("{% static 'fonts/handwriting4.ttf' %}") format('truetype');
+        }
+
+        @font-face {
+            font-family: 'Handwriting5';
+            src: url("{% static 'fonts/handwriting5.ttf' %}") format('truetype');
+        }
+
+        @font-face {
+            font-family: 'Handwriting6';
+            src: url("{% static 'fonts/handwriting6.ttf' %}") format('truetype');
+        }
+
+        /* Map font-family to classes */
+        .handwriting1 {
+            font-family: 'Handwriting1', cursive;
+        }
+
+        .handwriting2 {
+            font-family: 'Handwriting2', cursive;
+        }
+
+        .handwriting3 {
+            font-family: 'Handwriting3', cursive;
+        }
+
+        .handwriting4 {
+            font-family: 'Handwriting4', cursive;
+        }
+
+        .handwriting5 {
+            font-family: 'Handwriting5', cursive;
+        }
+
+        .handwriting6 {
+            font-family: 'Handwriting6', cursive;
+        }
+
+        /* General Styling */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        header {
+            background-color: #4a4a4a;
+            color: white;
+            padding: 10px 0;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .navbar .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .navbar nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+
+        .header-icons .get-started {
+            background-color: #ff4081;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            text-decoration: none;
+            margin-left: 10px;
+        }
+
+        .header-icons .get-started:hover {
+            background-color: #e73370;
+        }
+
+        main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        h2 {
+            color: #4a4a4a;
+            font-size: 32px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        form {
+            background-color: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 90%;
+            max-width: 600px;
+            text-align: center;
+        }
+
+        textarea {
+            width: 100%;
+            height: 150px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            resize: none;
+            font-size: 16px;
+        }
+
+        select {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+
+        button {
+            background-color: #ff4081;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: background 0.3s;
+            margin-top: 20px;
+        }
+
+        button:hover {
+            background-color: #e73370;
+        }
+
+        footer {
+            background-color: #4a4a4a;
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+            margin-top: auto;
+        }
+
+        footer a {
+            color: #ff4081;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        .font-preview {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            background-color: #fff;
+            font-size: 18px;
+            text-align: center;
+        }
+    </style>
+    <!-- Load custom handwriting fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&family=Indie+Flower&family=Dancing+Script&family=Shadows+Into+Light&family=Amatic+SC:wght@400;700&family=Gloria+Hallelujah&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <!-- Header -->
+    <header>
+        <div class="navbar">
+            <div class="logo">Text2Ink</div>
+            <nav>
+                <a href="{% url 'home' %}">Home</a>
+                <a href="{% url 'generate_pdf' %}">Text-To-Handwriting-Generator</a>
+                <a href="{% url 'learn_with_ai' %}">Learn-With-AI</a>
+                <a href="{% url 'news' %}">News</a>
+            </nav>
+            <div class="header-icons">
+                {% if user.is_authenticated %}
+                    <span>Welcome, {{ user.username }}!</span>
+                    <a class="get-started" href="{% url 'signout' %}">Sign Out</a>
+                {% else %}
+                    <a class="get-started" href="{% url 'signin' %}">Sign In</a>
+                    <a class="get-started" href="{% url 'signup' %}">Sign Up</a>
+                {% endif %}
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <h2>Text to Handwriting Generator</h2>
+        <form method="POST" action="{% url 'generate_pdf' %}">
+            {% csrf_token %}
+            <label for="text">Enter Text:</label>
+            <textarea id="text" name="text" placeholder="Type or paste your text here..."></textarea>
+
+            <label for="font">Select Font:</label>
+            <select id="font" name="font" onchange="updateFontPreview()">
+                <option value="handwriting1" class="handwriting1">Handwriting 1</option>
+                <option value="handwriting2" class="handwriting2">Handwriting 2</option>
+                <option value="handwriting3" class="handwriting3">Handwriting 3</option>
+                <option value="handwriting4" class="handwriting4">Handwriting 4</option>
+                <option value="handwriting5" class="handwriting5">Handwriting 5</option>
+                <option value="handwriting6" class="handwriting6">Handwriting 6</option>
+            </select>
+
+            <label for="background">Select Background:</label>
+            <select id="background" name="background">
+                <option value="plain">Plain</option>
+                <option value="ruled">Ruled</option>
+            </select>
+
+            <label for="text_color">Select Text Color:</label>
+            <select id="text_color" name="text_color">
+                <option value="black">Black</option>
+                <option value="red">Red</option>
+                <option value="blue">Blue</option>
+                <option value="green">Green</option>
+            </select>
+
+            <button type="submit">Generate PDF</button>
+        </form>
+
+        <!-- Font Preview -->
+        <div id="font-preview" class="font-preview">This is a font preview</div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2025 Text2Ink Platform. All rights reserved.</p>
+        <p>Made with <i class="fas fa-heart"></i> by Text2Ink</p>
+    </footer>
+
+    <script>
+        function updateFontPreview() {
+            const fontSelect = document.getElementById('font');
+            const fontPreview = document.getElementById('font-preview');
+            const selectedFontClass = fontSelect.options[fontSelect.selectedIndex].value;
+
+            // Remove existing font classes
+            fontPreview.className = 'font-preview';
+
+            // Add the selected font class
+            fontPreview.classList.add(selectedFontClass);
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,265 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text2Ink</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* CSS Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+        }
+
+        header {
+            background-color: #4a4a4a;
+            color: white;
+            padding: 10px 0;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .navbar .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .navbar nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+
+        .header-icons {
+            display: flex;
+            align-items: center;
+        }
+
+        .header-icons .get-started {
+            background-color: #ff4081;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            text-decoration: none;
+            margin-left: 10px;
+        }
+
+        .header-icons .get-started:hover {
+            background-color: #e73370;
+        }
+
+        .main-content {
+            text-align: center;
+            padding: 50px 20px;
+        }
+
+        .main-content h1 {
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+
+        .main-content p {
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+
+        .main-content .btn {
+            background-color: #ff4081;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 16px;
+        }
+
+        .main-content .btn:hover {
+            background-color: #e73370;
+        }
+
+        .reviews {
+            background-color: white;
+            padding: 50px 20px;
+            text-align: center;
+        }
+
+        .reviews h2 {
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+
+        .reviews .review-cards {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+        }
+
+        .reviews .review-card {
+            background-color: #f5f5f5;
+            padding: 20px;
+            border-radius: 10px;
+            width: 200px;
+            margin: 10px;
+            text-align: center;
+        }
+
+        .reviews .review-card img {
+            border-radius: 50%;
+            width: 80px;
+            height: 80px;
+            margin-bottom: 10px;
+        }
+
+        .reviews .review-card p {
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+        .reviews .review-card .name {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .reviews .review-card .role {
+            color: #777;
+            font-size: 12px;
+        }
+
+        footer {
+            background-color: #4a4a4a;
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+            margin-top: 20px;
+        }
+
+        footer p {
+            margin: 5px 0;
+        }
+
+        footer a {
+            color: #ff4081;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* About Section Styles */
+        .about-section {
+            background-color: #ffffff;
+            padding: 50px 20px;
+            text-align: center;
+            color: #333;
+        }
+
+        .about-section h2 {
+            font-size: 28px;
+            margin-bottom: 20px;
+            color: #4a4a4a;
+        }
+
+        .about-section p {
+            font-size: 16px;
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+
+        .about-section h3 {
+            font-size: 22px;
+            margin: 20px 0 10px;
+            color: #ff4081;
+        }
+
+        .about-section ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .about-section ul li {
+            font-size: 16px;
+            margin-bottom: 10px;
+            text-align: left;
+            display: inline-block;
+            width: 80%;
+        }
+
+        .about-section ul li strong {
+            color: #4a4a4a;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="navbar">
+            <div class="logo">Text2Ink</div>
+            <nav>
+                <a href="{% url 'home' %}">Home</a>
+                <a href="{% url 'generate_pdf' %}">Text-To-Handwriting-Generator</a>
+                <a href="{% url 'learn_with_ai' %}">Learn-With-AI</a>
+                <a href="{% url 'news' %}">News</a>
+            </nav>
+            <div class="header-icons">
+                {% if user.is_authenticated %}
+                    <span>Welcome, {{ user.username }}!</span>
+                    <a class="get-started" href="{% url 'signout' %}">Sign Out</a>
+                {% else %}
+                    <a class="get-started" href="{% url 'signin' %}">Sign In</a>
+                    <a class="get-started" href="{% url 'signup' %}">Sign Up</a>
+                {% endif %}
+            </div>
+        </div>
+    </header>
+
+    <div class="main-content">
+        <h1>Welcome to STOCKFOCUS</h1>
+        <p>Learn. Connect. Invest !</p>
+        <a href="{% url 'home' %}" class="btn">Begin Your Journey</a>
+    </div>
+
+    <div class="about-section">
+        <h2>About Text2Ink</h2>
+        <p>Welcome to Text2Ink – where digital meets the art of handwriting!</p>
+        <p>We specialize in transforming your typed text into realistic, personalized handwriting. Whether you’re a student looking to add a handwritten touch to your assignments or a professional wanting to create unique notes, Text2Ink makes it simple and stylish.</p>
+        <h3>✨ Why Choose Text2Ink?</h3>
+        <ul>
+            <li><strong>Multiple Handwriting Styles:</strong> Choose from six unique handwriting styles to match your preference.</li>
+            <li><strong>Seamless Text Wrapping:</strong> No more cut-off sentences – our tool automatically wraps your text to fit perfectly.</li>
+            <li><strong>User-Friendly Interface:</strong> Generate handwritten content effortlessly in just a few clicks.</li>
+        </ul>
+        <p>At Text2Ink, we blend innovation with creativity – making your words come to life, one stroke at a time.</p>
+    </div>
+
+    <div class="reviews">
+        <h2>Reviews That Speak Volumes</h2>
+        <p>Don't just take our word for it, hear what students have to say about us..</p>
+        <div class="review-cards">
+            <div class="review-card">
+                <img src="{% static 'images/review1.png' %}" alt="Review 1">
+                <p>This platform helped me learn so effectively. The courses are amazing and the instructors are top-notch.</p>
+                <div class="name">Aashish Kumar</div>
+                <div class="role">Student</div>
+            </div>
+           
+    <footer>
+        <p>© 2025 Text2Ink Platform. All rights reserved.</p>
+        <p>Made with <i class="fas fa-heart"></i> by Text2Ink</p>
+    </footer>
+</body>
+</html>
